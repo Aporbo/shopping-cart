@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
-
 <head>
    <title>Shopping Cart</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
-   <link href="style.css" rel="stylesheet">
+   <link href="style.css" rel="stylesheet">  
 </head>
-
 <body>
 
    <section>
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
+
+               <div id="1st" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
@@ -30,12 +29,12 @@
                            <button id="plusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$<span id="phonePrice">1219</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img id="cross1" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div id="2nd" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -49,7 +48,7 @@
 
                         </div>
                         <h5>$<span id="casePrice">59</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img id="cross2" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -79,16 +78,51 @@
    </section>
 </body>
 <script>
+
+const firstCross = document.getElementById("cross1");
+firstCross.addEventListener("click",function(){
+var phonepriceString = document.getElementById("phonePrice").innerText;
+var phonepriceNumber =parseFloat(phonepriceString);
+
+   var subTotal= document.getElementById("subTotal").innerText;
+var subTotalNumber = parseFloat(subTotal);
+   var newSubTotalNumber = subTotalNumber-phonepriceNumber;
+   console.log(newSubTotalNumber);
+   document.getElementById("subTotal").innerText=newSubTotalNumber;
+
+   var finalTotal = document.getElementById("finalTotal").innerText;
+finalTotal = newSubTotalNumber;
+document.getElementById("finalTotal").innerText = finalTotal;
+   document.getElementById("1st").style.display = "none";
+})
+const secondCross = document.getElementById("cross2");
+secondCross.addEventListener("click",function(){
+   var casepriceString = document.getElementById("casePrice").innerText;
+var casepriceNumber = parseFloat(casepriceString);
+
+   var subTotal= document.getElementById("subTotal").innerText;
+var subTotalNumber = parseFloat(subTotal);
+   var newSubTotalNumber = subTotalNumber-casepriceNumber;
+   console.log(newSubTotalNumber);
+   document.getElementById("subTotal").innerText=newSubTotalNumber;
+
+   var finalTotal = document.getElementById("finalTotal").innerText;
+finalTotal = newSubTotalNumber;
+document.getElementById("finalTotal").innerText = finalTotal;
+
+   
+   document.getElementById("2nd").style.display = "none";
+})
+
    function UpdateSubtotal(){
-      var subTotal= document.getElementById("subTotal").innerText;
+var subTotal= document.getElementById("subTotal").innerText;
 var subTotalNumber = parseFloat(subTotal);
 
 var phonepriceString = document.getElementById("phonePrice").innerText;
 var phonepriceNumber =parseFloat(phonepriceString);
-console.log(phonepriceNumber);
+
 var casepriceString = document.getElementById("casePrice").innerText;
 var casepriceNumber = parseFloat(casepriceString);
-console.log(casepriceNumber);
 subTotalNumber = phonepriceNumber+casepriceNumber;
 
 document.getElementById("subTotal").innerText=subTotalNumber; 
@@ -104,7 +138,7 @@ else if (subTotalNumber>0){
    var finalTotal = document.getElementById("finalTotal").innerText;
 finalTotal = subTotalNumber+ (taxNumber*subTotalNumber)/100;
 document.getElementById("finalTotal").innerText = finalTotal;
-console.log(finalTotal);
+
 }
 
 
